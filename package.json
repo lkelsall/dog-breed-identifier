@@ -1,0 +1,27 @@
+{
+  "name": "dog-breed-identifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"./\" --no-error-on-unmatched-pattern",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulOR26/dog-breed-identifier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulOR26/dog-breed-identifier/issues"
+  },
+  "homepage": "https://github.com/PaulOR26/dog-breed-identifier#readme",
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.1"
+  }
+}
