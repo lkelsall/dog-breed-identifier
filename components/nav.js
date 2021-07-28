@@ -1,8 +1,20 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
 
-const nav = () => {
-  return <View></View>;
+const styles = StyleSheet.create({
+  container: {
+    height: "10%",
+    width: "100%",
+    backgroundColor: "blue",
+  },
+});
+
+const Nav = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Hello</Text>
+    </View>
+  );
 };
 
-export default nav;
+export default Nav;
