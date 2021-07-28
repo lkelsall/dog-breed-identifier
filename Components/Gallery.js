@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { View, Image } from 'react-native';
 const Gallery = () => {
-  const [dogPictures, setDogPictures] = useState([
+  const [dogPictures] = useState([
     {
       dogImage: require('../dog-images/dalmation.jpg'),
       characteristic1: 'Happy nature',
