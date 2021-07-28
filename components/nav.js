@@ -1,5 +1,29 @@
 import React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
+import PropTypes from 'prop-types';
+
+const Nav = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('History');
+        }}
+        style={styles.historyButton}
+      >
+        <Text>History</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('Home');
+        }}
+        style={styles.photoButton}
+      >
+        <Text>Take photo</Text>
+      </Pressable>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -21,17 +45,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Nav = () => {
-  return (
-    <View style={styles.container}>
-      <Pressable style={styles.historyButton}>
-        <Text>History</Text>
-      </Pressable>
-      <Pressable style={styles.photoButton}>
-        <Text>Take photo</Text>
-      </Pressable>
-    </View>
-  );
+Nav.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Nav;
