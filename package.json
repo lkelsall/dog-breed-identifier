@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"./\" --no-error-on-unmatched-pattern",
+    "fix": "eslint ./ --fix",
     "prepare": "husky install",
     "start": "expo start",
     "android": "expo start --android",
