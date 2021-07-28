@@ -6,14 +6,18 @@ const styles = StyleSheet.create({
     height: '10%',
     width: '100%',
     backgroundColor: 'blue',
+    flexDirection: 'row',
   },
   historyButton: {
-    alignSelf: 'flex-start',
+    width: '20%',
+    height: '100%',
     backgroundColor: 'green',
   },
   photoButton: {
-    alignSelf: 'center',
+    width: '40%',
+    height: '100%',
     backgroundColor: 'red',
+    marginLeft: '10%',
   },
 });
 
