@@ -1,6 +1,19 @@
 import React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 
+const Nav = () => {
+  return (
+    <View style={styles.container}>
+      <Pressable style={styles.historyButton}>
+        <Text>History</Text>
+      </Pressable>
+      <Pressable style={styles.photoButton}>
+        <Text>Take photo</Text>
+      </Pressable>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     height: '10%',
@@ -20,18 +33,5 @@ const styles = StyleSheet.create({
     marginLeft: '10%',
   },
 });
-
-const Nav = () => {
-  return (
-    <View style={styles.container}>
-      <Pressable style={styles.historyButton}>
-        <Text>History</Text>
-      </Pressable>
-      <Pressable style={styles.photoButton}>
-        <Text>Take photo</Text>
-      </Pressable>
-    </View>
-  );
-};
 
 export default Nav;
