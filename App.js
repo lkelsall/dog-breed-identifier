@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './components/HomeScreen';
@@ -9,14 +9,17 @@ import Nav from './components/nav';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [camera, setCamera] = useState(null);
   return (
     <NavigationContainer>
       <Tab.Navigator
         tabBar={(props) => {
-          return <Nav {...props} />;
+          return <Nav {...props} camera={camera} />;
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Home">
+          {(props) => <HomeScreen {...props} setCamera={setCamera} />}
+        </Tab.Screen>
         <Tab.Screen name="History" component={HistoryScreen} />
       </Tab.Navigator>
     </NavigationContainer>
