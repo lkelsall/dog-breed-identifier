@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 });
 
 HomeScreen.propTypes = {
-  setCamera: PropTypes.function,
+  setCamera: PropTypes.func,
 };
 
 export default HomeScreen;
