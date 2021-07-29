@@ -1,22 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 const HistoryScreen = ({ route }) => {
-  const { photo } = route.params;
-  console.log(photo);
-
-  // const readPhoto = async (photo) => {
-  //   const photoString = await FileSystem.readAsStringAsync(photo);
-  // };
-
-  // useEffect(() => {
-  //   readPhoto();
-  // });
+  const { dogUri } = route.params;
 
   return (
     <View>
       <Text>This is the history screen</Text>
+      <Image style={{ width: 100, height: 100 }} source={{ uri: dogUri }} />
     </View>
   );
 };

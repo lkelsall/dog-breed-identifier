@@ -17,8 +17,8 @@ const Nav = ({ navigation, state, camera }) => {
       <Pressable
         onPress={() => {
           if (state.routeNames[state.index] === 'Home') {
-            snap(camera).then((photo) => {
-              navigation.navigate('History', { photo: photo });
+            snap(camera).then((dogUri) => {
+              navigation.navigate('History', { dogUri: dogUri });
             });
           } else {
             navigation.navigate('Home');
