@@ -9,12 +9,12 @@ import Nav from './components/nav';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const setCamera = useState(null)[1];
+  const [camera, setCamera] = useState(null);
   return (
     <NavigationContainer>
       <Tab.Navigator
         tabBar={(props) => {
-          return <Nav {...props} />;
+          return <Nav {...props} camera={camera} />;
         }}
       >
         <Tab.Screen name="Home">

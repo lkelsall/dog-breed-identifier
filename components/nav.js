@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import { snap } from '../utils/camera.utils';
 
-const Nav = ({ navigation }) => {
+const Nav = ({ navigation, state, camera }) => {
   return (
     <View style={styles.container}>
       <Pressable
@@ -15,7 +16,13 @@ const Nav = ({ navigation }) => {
       </Pressable>
       <Pressable
         onPress={() => {
-          navigation.navigate('Home');
+          if (state.routeNames[state.index] === 'Home') {
+            snap(camera).then((key) => {
+              navigation.navigate('History', { key: key });
+            });
+          } else {
+            navigation.navigate('Home');
+          }
         }}
         style={styles.photoButton}
       >
@@ -47,6 +54,8 @@ const styles = StyleSheet.create({
 
 Nav.propTypes = {
   navigation: PropTypes.object,
+  state: PropTypes.object,
+  camera: PropTypes.object,
 };
 
 export default Nav;
