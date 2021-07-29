@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';
+import PropTypes from 'prop-types';
 
-const HomeScreen = () => {
+const HomeScreen = ({ setCamera }) => {
   const [hasPermission, setHasPermission] = useState(null);
 
   useEffect(() => {
@@ -24,7 +25,13 @@ const HomeScreen = () => {
   }
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={Camera.Constants.Type.back} />
+      <Camera
+        style={styles.camera}
+        type={Camera.Constants.Type.back}
+        ref={(r) => {
+          setCamera(r);
+        }}
+      />
     </View>
   );
 };
@@ -42,5 +49,9 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
+
+HomeScreen.propTypes = {
+  setCamera: PropTypes.function,
+};
 
 export default HomeScreen;
