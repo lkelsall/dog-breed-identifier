@@ -13,7 +13,8 @@ const HomeScreen = ({ setCamera, navigation }) => {
     });
     navigation.addListener('blur', () => {
       setIsFocused(false);
-    })(async () => {
+    });
+    (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
