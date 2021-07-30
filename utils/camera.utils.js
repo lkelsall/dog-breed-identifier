@@ -1,8 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeDog } from './storage-utils/';
 
 exports.snap = async (camera) => {
-  let photo = await camera.takePictureAsync({ base64: true });
-  const key = String(Date.now());
-  await AsyncStorage.setItem(key, photo.base64);
-  return key;
+  let photo = await camera.takePictureAsync();
+  let dogUri = await storeDog(photo.uri);
+  console.log(dogUri);
+  return dogUri;
 };
