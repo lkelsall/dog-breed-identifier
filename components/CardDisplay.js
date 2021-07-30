@@ -16,8 +16,11 @@ const CardDisplay = () => {
     <View>
       <Card>
         <Card.Divider />
+        <Card.Image
+          source={require('../dog-images/pug.jpg')}
+          styles={{ width: 10, height: 10 }}
+        />
         <Card.Title>{dogObject.breed}</Card.Title>
-        <Card.Image source={require('')} styles={{ width: 10, height: 10 }} />
       </Card>
     </View>
   );
