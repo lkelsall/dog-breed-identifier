@@ -25,7 +25,9 @@ const CardDisplay = () => {
           style={styles.stockImage}
           source={require('../dog-images/little-pug.jpg')}
         />
-        <Text>Percentage match: {dogObject.percentageMatch}</Text>
+        <Text style={styles.text}>
+          Percentage match: {dogObject.percentageMatch}
+        </Text>
         <Text>Temperament: {dogObject.temperamant}</Text>
         <Text>Characteristics: {dogObject.characteristics}</Text>
         <Text>Exercise requirements: {dogObject.exercise}</Text>
@@ -46,6 +48,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 

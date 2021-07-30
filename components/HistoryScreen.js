@@ -9,7 +9,6 @@ const HistoryScreen = () => {
   return (
     <View>
       <CardDisplay>{CardDisplay}</CardDisplay>
-      <Text>This is the history screen</Text>
     </View>
   );
 };
