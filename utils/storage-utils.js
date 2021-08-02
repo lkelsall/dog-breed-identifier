@@ -19,3 +19,6 @@ export const readDirectory = async () => {
 
   return arrFileNameStrings;
 };
+export const deleteCard = async (uri) => {
+  await FileSystem.deleteAsync(uri);
+};

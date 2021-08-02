@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { getDogInfo } from '../utils/api';
+import { deleteCard } from '../utils/storage-utils';
 
 const CardDisplay = ({ dogUri }) => {
   const [dogObject, setDogObject] = useState([]);
@@ -13,7 +14,6 @@ const CardDisplay = ({ dogUri }) => {
   useEffect(() => {
     getDogInfo(breed)
       .then((dataFromApi) => {
-        console.log(dataFromApi);
         setDogObject(dataFromApi);
         setIsLoading(false);
       })
@@ -22,14 +22,20 @@ const CardDisplay = ({ dogUri }) => {
       });
   }, []);
   const deleteAlert = () => {
-    Alert.alert('Warning!', 'Are you sure you want to delete your card?', [
-      {
-        text: 'yes',
-        onPress: () => console.log('card deleted'),
-        style: 'tick',
-      },
-      { text: 'No', onPress: () => console.log('okay') },
-    ]);
+    Alert.alert(
+      'Warning!',
+      'Are you sure you do not want to add this card to the gallery?',
+      [
+        {
+          text: 'yes',
+          onPress: () => {
+            deleteCard(dogUri);
+          },
+          style: 'tick',
+        },
+        { text: 'No', onPress: () => console.log('okay') },
+      ]
+    );
   };
   if (isLoading) {
     return <Text>...is loading</Text>;
