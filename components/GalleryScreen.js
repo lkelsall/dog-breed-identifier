@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, StyleSheet, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import { readDirectory } from '../utils/storage-utils';
 import * as FileSystem from 'expo-file-system';
@@ -13,7 +13,6 @@ const GalleryScreen = () => {
   useEffect(() => {
     readDirectory()
       .then((dogArray) => {
-        console.log(dogArray, 'In the useEffect');
         setAllDogs(dogArray);
         setIsLoading(false);
       })
@@ -22,15 +21,14 @@ const GalleryScreen = () => {
       });
   }, []);
   if (isLoading) {
-    console.log('Loading');
+    return <Text>...loading</Text>;
   }
   return (
-    <View>
+    <View style={styles.container}>
       {allDogs.map((imageUri) => {
-        console.log(`${photoDir}/${imageUri}`);
         return (
           <Image
-            style={{ width: 100, height: 100 }}
+            style={{ width: 100, height: 100, margin: 5 }}
             source={{ uri: `${photoDir}/${imageUri}` }}
             key={imageUri}
           />
@@ -39,5 +37,13 @@ const GalleryScreen = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#5f9ea0',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+  },
+});
 
 export default GalleryScreen;

@@ -16,6 +16,6 @@ export const storeDog = async (uri) => {
 };
 export const readDirectory = async () => {
   const arrFileNameStrings = await FileSystem.readDirectoryAsync(photoDir);
-  // console.log(arrFileNameStrings, 'in the gallery');
+
   return arrFileNameStrings;
 };

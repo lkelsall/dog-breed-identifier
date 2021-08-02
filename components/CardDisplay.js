@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import { getDogInfo } from '../utils/api';
 
 const CardDisplay = ({ dogUri }) => {
-  const dogObject = {
-    photo: 'URI',
-    breed: 'Pug',
-    percentageMatch: '76%',
-    temperamant: 'Gentle and affectionate',
-    characteristics: 'Merry nature',
-    exercise: '1hr +',
-    size: 'Medium',
-  };
+  const [dogObject, setDogObject] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const breed = 'cockerspaniel';
+  useEffect(() => {
+    getDogInfo(breed)
+      .then((dataFromApi) => {
+        console.log(dataFromApi);
+        setDogObject(dataFromApi);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const deleteAlert = () => {
     Alert.alert('Warning!', 'Are you sure you want to delete your card?', [
       {
@@ -25,6 +31,9 @@ const CardDisplay = ({ dogUri }) => {
       { text: 'No', onPress: () => console.log('okay') },
     ]);
   };
+  if (isLoading) {
+    return <Text>...is loading</Text>;
+  }
   return (
     <View style={styles.container}>
       <Card>
@@ -33,17 +42,23 @@ const CardDisplay = ({ dogUri }) => {
           style={{ width: 400, height: 300 }}
         />
         <Card.Divider />
-        <Card.Title style={styles.title}>{dogObject.breed}</Card.Title>
+        <Card.Title style={styles.title}>
+          {dogObject.breedInformation.size}
+        </Card.Title>
         <Image
           style={styles.stockImage}
-          source={require('../dog-images/little-pug.jpg')}
+          source={{ uri: dogObject.breedInformation.dog_url }}
         />
         <View style={styles.text}>
-          <Text>Percentage match: {dogObject.percentageMatch}</Text>
-          <Text>Temperament: {dogObject.temperamant}</Text>
-          <Text>Characteristics: {dogObject.characteristics}</Text>
-          <Text>Exercise requirements: {dogObject.exercise}</Text>
-          <Text>Size: {dogObject.size}</Text>
+          <Text>Percentage match: Hardcoded at 76%</Text>
+          <Text>Temperament: {dogObject.breedInformation.temperament}</Text>
+          <Text>
+            Characteristics: {dogObject.breedInformation.characteristics}
+          </Text>
+          <Text>
+            Exercise requirements: {dogObject.breedInformation.exercise}
+          </Text>
+          <Text>Size: {dogObject.breedInformation.size}</Text>
         </View>
         <FontAwesomeIcon
           size={30}
