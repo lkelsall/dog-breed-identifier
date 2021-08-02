@@ -13,8 +13,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBar={(props) => {
-          return <Nav {...props} camera={camera} />;
+        tabBar={(props, setParams) => {
+          return <Nav {...props} camera={camera} {...setParams} />;
         }}
       >
         <Tab.Screen name="Home">

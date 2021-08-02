@@ -3,8 +3,9 @@ import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
-const CardDisplay = () => {
+const CardDisplay = ({ dogUri }) => {
   const dogObject = {
     photo: 'URI',
     breed: 'Pug',
@@ -28,7 +29,7 @@ const CardDisplay = () => {
     <View style={styles.container}>
       <Card>
         <Card.Image
-          source={require('../dog-images/pug.jpg')}
+          source={{ uri: dogUri }}
           style={{ width: 400, height: 300 }}
         />
         <Card.Divider />
@@ -79,5 +80,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 });
+CardDisplay.propTypes = {
+  dogUri: PropTypes.object,
+  route: PropTypes.object,
+};
 
 export default CardDisplay;
