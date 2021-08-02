@@ -43,7 +43,7 @@ const CardDisplay = ({ dogUri }) => {
         />
         <Card.Divider />
         <Card.Title style={styles.title}>
-          {dogObject.breedInformation.size}
+          {dogObject.breedInformation.breed}
         </Card.Title>
         <Image
           style={styles.stockImage}
