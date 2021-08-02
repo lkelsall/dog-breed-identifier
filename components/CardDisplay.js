@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
 });
 CardDisplay.propTypes = {
-  dogUri: PropTypes.object,
+  dogUri: PropTypes.string,
   route: PropTypes.object,
 };
 

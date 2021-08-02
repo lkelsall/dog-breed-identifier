@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { snap } from '../utils/camera.utils';
-import { readDirectory } from '../utils/storage-utils';
 
 const Nav = ({ navigation, state, camera }) => {
   return (
@@ -10,12 +9,7 @@ const Nav = ({ navigation, state, camera }) => {
       <Pressable
         onPress={() => {
           if (state.routeNames[state.index] === 'History') {
-            readDirectory().then((arrFileNameStrings) => {
-              // console.log(arrFileNameStrings);
-              navigation.setParams('History', {
-                arrFileNameStrings: arrFileNameStrings,
-              });
-            });
+            navigation.navigate('Gallery');
           }
         }}
         style={styles.historyButton}
