@@ -30,15 +30,20 @@ const CardDisplay = ({ dogObject }) => {
   return (
     <View style={styles.container}>
       <Card>
-        <Card.Image source={{}} style={{ width: 400, height: 300 }} />
+        <Card.Image
+          source={{ uri: `${dogObject.photoUri}` }}
+          style={{ width: 400, height: 300 }}
+        />
         <Card.Divider />
         <Card.Title style={styles.title}>{dogObject.breed}</Card.Title>
         <Image
           style={styles.stockImage}
-          source={{ uri: `${dogObject.photUri}` }}
+          source={{ uri: `${dogObject.dog_url}` }}
         />
         <View style={styles.text}>
-          <Text>Percentage match: {dogObject.confidences * 100}</Text>
+          <Text>
+            Percentage match: {Math.floor(dogObject.confidences * 100)}%
+          </Text>
           <Text>Temperament: {dogObject.temperament}</Text>
           <Text>Characteristics: {dogObject.characteristics}</Text>
           <Text>Exercise requirements: {dogObject.exercise}</Text>
