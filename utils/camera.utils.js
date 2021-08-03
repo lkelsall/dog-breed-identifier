@@ -24,6 +24,7 @@ exports.snap = async (camera) => {
     })
     .then((response) => {
       newDog = { ...response.data.prediction };
+      console.log(response.data);
     })
     .catch((err) => {
       console.log('fetch error:', err);

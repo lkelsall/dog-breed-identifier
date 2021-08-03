@@ -22,6 +22,6 @@ export const storeDogObj = async (dogObj) => {
   if (!directoryInfo.exist) {
     await FileSystem.makeDirectoryAsync(dogsDir, { intermediates: true });
   }
-  await FileSystem.writeAsStringAsync(newUri, dogObj);
+  await FileSystem.writeAsStringAsync(newUri, JSON.stringify(dogObj));
   return newUri;
 };
