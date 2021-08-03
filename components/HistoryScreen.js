@@ -7,21 +7,21 @@ import { useEffect } from 'react';
 import { readDogObject } from '../utils/storage-utils';
 
 const HistoryScreen = ({ route }) => {
-  const [currentDog, setCurrentDog] = useState({});
+  const [currentDog, setCurrentDog] = useState(null);
   const { dogUri } = route.params;
 
   useEffect(() => {
     if (dogUri) {
       readDogObject(dogUri).then((dogObject) => {
-        console.log(dogUri);
         setCurrentDog(dogObject);
+        console.log(currentDog, 'in the HS');
       });
     }
-  }, []);
+  }, [dogUri]);
 
   return (
     <View>
-      <CardDisplay dogObject={currentDog} />
+      {currentDog ? <CardDisplay dogObject={currentDog} /> : <View></View>}
     </View>
   );
 };
