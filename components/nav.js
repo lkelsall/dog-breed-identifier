@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { snap } from '../utils/camera.utils';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHistory, faCamera, faDog } from '@fortawesome/free-solid-svg-icons';
 
 const Nav = ({ navigation, state, camera }) => {
   return (
@@ -14,13 +16,19 @@ const Nav = ({ navigation, state, camera }) => {
         }}
         style={styles.historyButton}
       >
-        <Text>History</Text>
+        <Text style={styles.buttonText}>History</Text>
+        <FontAwesomeIcon
+          size={30}
+          style={styles.icon}
+          icon={faHistory}
+        ></FontAwesomeIcon>
       </Pressable>
       <Pressable
         onPress={() => {
           if (state.routeNames[state.index] === 'Home') {
             snap(camera).then((dogUri) => {
               navigation.navigate('History', { dogUri: dogUri });
+              console.log(dogUri, 'in the nav');
             });
           } else {
             navigation.navigate('Home');
@@ -28,8 +36,20 @@ const Nav = ({ navigation, state, camera }) => {
         }}
         style={styles.photoButton}
       >
-        <Text>Take photo</Text>
+        <Text style={styles.buttonText}>Take photo</Text>
+        <FontAwesomeIcon
+          size={30}
+          style={styles.icon}
+          icon={faCamera}
+        ></FontAwesomeIcon>
       </Pressable>
+      <View style={styles.dogIconView}>
+        <FontAwesomeIcon
+          size={30}
+          style={styles.iconDog}
+          icon={faDog}
+        ></FontAwesomeIcon>
+      </View>
     </View>
   );
 };
@@ -38,19 +58,47 @@ const styles = StyleSheet.create({
   container: {
     height: '10%',
     width: '100%',
-    backgroundColor: 'blue',
+    backgroundColor: '#008080',
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   historyButton: {
-    width: '20%',
-    height: '100%',
-    backgroundColor: 'green',
+    width: '25%',
+    height: '90%',
+    backgroundColor: '#5f9ea0',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#f5fffa',
+    marginTop: '1%',
   },
   photoButton: {
     width: '40%',
-    height: '100%',
-    backgroundColor: 'red',
-    marginLeft: '10%',
+    height: '90%',
+    backgroundColor: '#f5fffa',
+    marginTop: '1%',
+
+    borderRadius: 5,
+  },
+  buttonText: {
+    padding: 8,
+    alignSelf: 'center',
+    fontWeight: '500',
+  },
+  icon: {
+    alignSelf: 'center',
+  },
+  iconDog: {
+    alignSelf: 'center',
+    marginTop: '28%',
+  },
+  dogIconView: {
+    width: '25%',
+    height: '90%',
+    backgroundColor: '#5f9ea0',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#f5fffa',
+    marginTop: '1%',
   },
 });
 

@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { getDogInfo } from '../utils/api';
+
 import { deleteCard } from '../utils/storage-utils';
 
-const CardDisplay = ({ dogUri }) => {
-  const [dogObject, setDogObject] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const breed = 'cockerspaniel';
-  useEffect(() => {
-    getDogInfo(breed)
-      .then((dataFromApi) => {
-        setDogObject(dataFromApi);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+const CardDisplay = ({ dogObject }) => {
+  console.log(dogObject, 'in card');
+
   const deleteAlert = () => {
     Alert.alert(
       'Warning!',
@@ -29,7 +18,7 @@ const CardDisplay = ({ dogUri }) => {
         {
           text: 'yes',
           onPress: () => {
-            deleteCard(dogUri);
+            deleteCard();
           },
           style: 'tick',
         },
@@ -37,34 +26,28 @@ const CardDisplay = ({ dogUri }) => {
       ]
     );
   };
-  if (isLoading) {
-    return <Text>...is loading</Text>;
-  }
+
   return (
     <View style={styles.container}>
       <Card>
         <Card.Image
-          source={{ uri: dogUri }}
+          source={{ uri: `${dogObject.photoUri}` }}
           style={{ width: 400, height: 300 }}
         />
         <Card.Divider />
-        <Card.Title style={styles.title}>
-          {dogObject.breedInformation.breed}
-        </Card.Title>
+        <Card.Title style={styles.title}>{dogObject.breed}</Card.Title>
         <Image
           style={styles.stockImage}
-          source={{ uri: dogObject.breedInformation.dog_url }}
+          source={{ uri: `${dogObject.dog_url}` }}
         />
         <View style={styles.text}>
-          <Text>Percentage match: Hardcoded at 76%</Text>
-          <Text>Temperament: {dogObject.breedInformation.temperament}</Text>
           <Text>
-            Characteristics: {dogObject.breedInformation.characteristics}
+            Percentage match: {Math.floor(dogObject.confidences * 100)}%
           </Text>
-          <Text>
-            Exercise requirements: {dogObject.breedInformation.exercise}
-          </Text>
-          <Text>Size: {dogObject.breedInformation.size}</Text>
+          <Text>Temperament: {dogObject.temperament}</Text>
+          <Text>Characteristics: {dogObject.characteristics}</Text>
+          <Text>Exercise requirements: {dogObject.exercise}</Text>
+          <Text>Size: {dogObject.size}</Text>
         </View>
         <FontAwesomeIcon
           size={30}
@@ -104,6 +87,7 @@ const styles = StyleSheet.create({
 CardDisplay.propTypes = {
   dogUri: PropTypes.string,
   route: PropTypes.object,
+  dogObject: PropTypes.object,
 };
 
 export default CardDisplay;

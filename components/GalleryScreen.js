@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import { ScrollView, View, Image, StyleSheet, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import { readDirectory } from '../utils/storage-utils';
 import * as FileSystem from 'expo-file-system';
@@ -28,28 +28,31 @@ const GalleryScreen = () => {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gallery</Text>
-      {allDogs.map((imageUri) => {
-        return (
-          <Image
-            style={{ width: 100, height: 100, margin: 5 }}
-            source={{ uri: `${photoDir}/${imageUri}` }}
-            key={imageUri}
-          />
-        );
-      })}
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+      >
+        {allDogs.map((imageUri) => {
+          return (
+            <Image
+              style={{ width: 100, height: 100, margin: 5 }}
+              source={{ uri: `${photoDir}/${imageUri}` }}
+              key={imageUri}
+            />
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#5f9ea0',
+  contentContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#b0e0e6',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-    alignContent: 'flex-start',
-    flex: 1,
-    paddingTop: 60,
+    padding: 10,
   },
   title: {
     flex: 1,
@@ -58,6 +61,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     paddingTop: 45,
     paddingBottom: 20,
+  },
+  scrollView: {
+    height: '100%',
+    width: '98%',
+    margin: 20,
+    alignSelf: 'center',
+    padding: 20,
+    borderWidth: 5,
+    borderRadius: 5,
+    borderColor: 'black',
+    backgroundColor: '#008080',
   },
 });
 
