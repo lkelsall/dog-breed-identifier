@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import CardDisplay from './CardDisplay';
 
 const HistoryScreen = ({ route }) => {
   const { dogUri } = route.params;
 
   return (
     <View>
-      <Text>This is the history screen</Text>
-      <Image style={{ width: 100, height: 100 }} source={{ uri: dogUri }} />
+      <CardDisplay dogUri={dogUri} />
     </View>
   );
 };

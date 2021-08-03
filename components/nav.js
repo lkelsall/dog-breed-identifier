@@ -8,7 +8,9 @@ const Nav = ({ navigation, state, camera }) => {
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          navigation.navigate('History');
+          if (state.routeNames[state.index] === 'History') {
+            navigation.navigate('Gallery');
+          }
         }}
         style={styles.historyButton}
       >
