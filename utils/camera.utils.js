@@ -1,9 +1,12 @@
-import { storeDog } from './storage-utils/';
+import { storeDogPic } from './storage-utils/';
 import * as ImageManipulator from 'expo-image-manipulator';
 import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
+import { storeDogObj } from './storage-utils';
 
 exports.snap = async (camera) => {
+  let newDog = {};
+
   let photo = await camera.takePictureAsync();
   const smallPhoto = await ImageManipulator.manipulateAsync(photo.uri, [
     { resize: { width: 400 } },
@@ -20,13 +23,16 @@ exports.snap = async (camera) => {
       base64: base64image,
     })
     .then((response) => {
-      console.log('log in snap:', response.data);
+      newDog = { ...response.data.prediction };
     })
     .catch((err) => {
       console.log('fetch error:', err);
     });
 
-  let dogUri = await storeDog(photo.uri);
+  let dogPicUri = await storeDogPic(photo.uri);
+  newDog = { ...newDog, photoUri: dogPicUri };
 
-  return dogUri;
+  const dogObjUri = await storeDogObj(newDog);
+
+  return dogObjUri;
 };
