@@ -18,22 +18,24 @@ exports.snap = async (camera) => {
     options
   );
 
-  axios
+  let dogPicUri = await storeDogPic(photo.uri);
+  return axios
     .post('https://dog-identifier-api.herokuapp.com/api/photo', {
       base64: base64image,
     })
     .then((response) => {
+      console.log(response.data.prediction, 'in api request');
       newDog = { ...response.data.prediction };
-      console.log(response.data);
+
+      newDog = { ...newDog, photoUri: dogPicUri };
+
+      return storeDogObj(newDog);
+    })
+    .then((dogObjectUri) => {
+      console.log(dogObjectUri, 'in the util');
+      return dogObjectUri;
     })
     .catch((err) => {
       console.log('fetch error:', err);
     });
-
-  let dogPicUri = await storeDogPic(photo.uri);
-  newDog = { ...newDog, photoUri: dogPicUri };
-
-  const dogObjUri = await storeDogObj(newDog);
-
-  return dogObjUri;
 };
