@@ -25,3 +25,7 @@ export const storeDogObj = async (dogObj) => {
   await FileSystem.writeAsStringAsync(newUri, JSON.stringify(dogObj));
   return newUri;
 };
+export const readDogObject = async (dogUri) => {
+  const dogObject = await FileSystem.readAsStringAsync(dogUri);
+  return JSON.parse(dogObject);
+};

@@ -21,6 +21,7 @@ const Nav = ({ navigation, state, camera }) => {
           if (state.routeNames[state.index] === 'Home') {
             snap(camera).then((dogUri) => {
               navigation.navigate('History', { dogUri: dogUri });
+              console.log(dogUri, 'in the nav');
             });
           } else {
             navigation.navigate('Home');
