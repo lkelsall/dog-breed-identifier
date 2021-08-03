@@ -14,7 +14,17 @@ exports.snap = async (camera) => {
     options
   );
 
-  base64image;
+  fetch('https://dog-identifier-api.herokuapp.com/api/breeds', {
+    method: 'GET',
+    body: JSON.stringify({ base64image }),
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+    })
+    .catch((err) => {
+      console.log('fetch error:', err);
+    });
 
   let dogUri = await storeDog(photo.uri);
 
