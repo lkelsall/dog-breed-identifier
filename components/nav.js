@@ -27,7 +27,6 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
           if (state.routeNames[state.index] === 'Home') {
             snap(camera, navigation).then((dogObject) => {
               setCurrentDog(dogObject);
-              // console.log(dogUri, 'in the nav');
             });
           } else {
             navigation.navigate('Home');
@@ -105,6 +104,7 @@ Nav.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object,
   camera: PropTypes.object,
+  setCurrentDog: PropTypes.func,
 };
 
 export default Nav;

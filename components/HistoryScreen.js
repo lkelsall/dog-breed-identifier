@@ -2,23 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import CardDisplay from './CardDisplay';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { readDogObject } from '../utils/storage-utils';
 import Loading from './Loading';
 import GalleryScreen from './GalleryScreen';
 
 const HistoryScreen = ({ route, currentDog, setCurrentDog }) => {
-  const { dogUri, navFrom } = route.params;
-
-  useEffect(() => {
-    console.log('dogUri from history screen', dogUri);
-    if (dogUri) {
-      readDogObject(dogUri).then((dogObject) => {
-        setCurrentDog(dogObject);
-      });
-    }
-  }, []);
+  const { navFrom } = route.params;
 
   if (currentDog) {
     return (
