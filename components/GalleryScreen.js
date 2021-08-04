@@ -1,32 +1,39 @@
 import React from 'react';
-import { ScrollView, View, Image, StyleSheet, Text } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { useState, useEffect } from 'react';
 import { readDirectory } from '../utils/storage-utils';
 import * as FileSystem from 'expo-file-system';
 import { useIsFocused } from '@react-navigation/native';
+import Loading from './Loading';
 
-const GalleryScreen = () => {
-  console.log('in gallery');
-  const isFocused = useIsFocused();
+const GalleryScreen = ({ setCurrentDog }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [allDogs, setAllDogs] = useState([]);
 
-  const dogsDir = FileSystem.documentDirectory + 'dogs/';
-
   useEffect(() => {
     readDirectory()
       .then((dogArray) => {
-        console.log(dogArray);
         setAllDogs(dogArray);
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [isFocused]);
+  }, []);
   if (isLoading) {
-    return <Text>...loading</Text>;
+    return (
+      <View>
+        <Loading />
+      </View>
+    );
   }
   return (
     <View style={styles.container}>
@@ -34,13 +41,19 @@ const GalleryScreen = () => {
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
       >
-        {allDogs.map((imageUri) => {
+        {allDogs.map((dogObject) => {
           return (
-            <Image
-              style={{ width: 100, height: 100, margin: 5 }}
-              source={{ uri: `${photoDir}/${imageUri}` }}
-              key={imageUri}
-            />
+            <TouchableOpacity
+              key={dogObject.photoUri}
+              onPress={() => {
+                setCurrentDog(dogObject);
+              }}
+            >
+              <Image
+                style={{ width: 100, height: 100, margin: 5 }}
+                source={{ uri: dogObject.photoUri }}
+              />
+            </TouchableOpacity>
           );
         })}
       </ScrollView>

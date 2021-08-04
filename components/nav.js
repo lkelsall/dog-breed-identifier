@@ -5,12 +5,13 @@ import { snap } from '../utils/camera.utils';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHistory, faCamera, faDog } from '@fortawesome/free-solid-svg-icons';
 
-const Nav = ({ navigation, state, camera }) => {
+const Nav = ({ navigation, state, camera, setCurrentDog }) => {
   return (
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          navigation.navigate('History', { navFrom: 'home' });
+          setCurrentDog(null);
+          navigation.navigate('History', { navFrom: 'notsnap' });
         }}
         style={styles.historyButton}
       >

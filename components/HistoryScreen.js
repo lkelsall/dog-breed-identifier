@@ -8,16 +8,14 @@ import { readDogObject } from '../utils/storage-utils';
 import Loading from './Loading';
 import GalleryScreen from './GalleryScreen';
 
-const HistoryScreen = ({ route }) => {
-  console.log('route console log >', route);
-  const [currentDog, setCurrentDog] = useState(null);
+const HistoryScreen = ({ route, currentDog, setCurrentDog }) => {
   const { dogUri, navFrom } = route.params;
 
   useEffect(() => {
+    console.log('navigating to history');
     if (dogUri) {
       readDogObject(dogUri).then((dogObject) => {
         setCurrentDog(dogObject);
-        console.log(currentDog, 'in the HS');
       });
     }
   }, [dogUri]);
@@ -37,7 +35,7 @@ const HistoryScreen = ({ route }) => {
   } else if (!currentDog && navFrom !== 'snap') {
     return (
       <View>
-        <GalleryScreen />
+        <GalleryScreen setCurrentDog={setCurrentDog} />
       </View>
     );
   }
