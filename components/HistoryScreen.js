@@ -7,7 +7,6 @@ import GalleryScreen from './GalleryScreen';
 
 const HistoryScreen = ({ route, currentDog, setCurrentDog, navigation }) => {
   const { navFrom } = route.params;
-  console.log('top of history');
 
   if (currentDog) {
     return (

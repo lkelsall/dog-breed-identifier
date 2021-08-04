@@ -18,12 +18,13 @@ export const storeDogPic = async (uri) => {
 
 export const storeDogObj = async (dogObj) => {
   const newUri = `${dogsDir}${Date.now()}.txt`;
+  const newDogObj = { newUri: newUri, ...dogObj };
   const directoryInfo = await FileSystem.getInfoAsync(dogsDir);
   if (!directoryInfo.exist) {
     await FileSystem.makeDirectoryAsync(dogsDir, { intermediates: true });
   }
-  await FileSystem.writeAsStringAsync(newUri, JSON.stringify(dogObj));
-  return newUri;
+  await FileSystem.writeAsStringAsync(newUri, JSON.stringify(newDogObj));
+  return newDogObj;
 };
 export const readDogObject = async (dogUri) => {
   const dogObject = await FileSystem.readAsStringAsync(dogUri);
@@ -32,11 +33,9 @@ export const readDogObject = async (dogUri) => {
 
 export const readDirectory = async () => {
   const dogObjectsArray = await FileSystem.readDirectoryAsync(dogsDir);
-  console.log(dogObjectsArray);
   const dogPromises = dogObjectsArray.map((dogFile) => {
     return FileSystem.readAsStringAsync(`${dogsDir}${dogFile}`).then(
       (result) => {
-        console.log(result);
         return JSON.parse(result);
       }
     );
@@ -44,6 +43,5 @@ export const readDirectory = async () => {
   return Promise.all(dogPromises);
 };
 export const deleteCard = async (dogObject) => {
-  console.log(dogObject, 'in utils');
   await FileSystem.deleteAsync(dogObject.newUri);
 };

@@ -32,11 +32,10 @@ exports.snap = async (camera, navigation) => {
 
       newDog = { ...newDog, photoUri: dogPicUri };
 
-      return Promise.all([storeDogObj(newDog), newDog]);
+      return storeDogObj(newDog);
     })
-    .then(([dogObjectUri, newDog]) => {
-      console.log(dogObjectUri, 'in the util');
-      return { ...newDog, newUri: dogObjectUri };
+    .then((newDog) => {
+      return newDog;
     })
     .catch((err) => {
       console.log('fetch error:', err);
