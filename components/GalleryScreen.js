@@ -1,16 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   ScrollView,
   View,
   Image,
   StyleSheet,
-  Text,
   TouchableOpacity,
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { readDirectory } from '../utils/storage-utils';
-import * as FileSystem from 'expo-file-system';
-import { useIsFocused } from '@react-navigation/native';
 import Loading from './Loading';
 
 const GalleryScreen = ({ setCurrentDog }) => {
@@ -89,5 +87,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#008080',
   },
 });
+
+GalleryScreen.propTypes = {
+  setCurrentDog: PropTypes.func,
+};
 
 export default GalleryScreen;
