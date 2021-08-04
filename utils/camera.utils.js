@@ -4,10 +4,13 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import { storeDogObj } from './storage-utils';
 
-exports.snap = async (camera) => {
+exports.snap = async (camera, navigation) => {
   let newDog = {};
 
   let photo = await camera.takePictureAsync();
+  navigation.navigate('History', {
+    navFrom: 'snap',
+  });
   const smallPhoto = await ImageManipulator.manipulateAsync(photo.uri, [
     { resize: { width: 400 } },
   ]);
@@ -29,11 +32,11 @@ exports.snap = async (camera) => {
 
       newDog = { ...newDog, photoUri: dogPicUri };
 
-      return storeDogObj(newDog);
+      return Promise.all([storeDogObj(newDog), newDog]);
     })
-    .then((dogObjectUri) => {
+    .then(([dogObjectUri, newDog]) => {
       console.log(dogObjectUri, 'in the util');
-      return dogObjectUri;
+      return newDog;
     })
     .catch((err) => {
       console.log('fetch error:', err);

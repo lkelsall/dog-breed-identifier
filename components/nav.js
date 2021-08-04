@@ -5,14 +5,13 @@ import { snap } from '../utils/camera.utils';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHistory, faCamera, faDog } from '@fortawesome/free-solid-svg-icons';
 
-const Nav = ({ navigation, state, camera }) => {
+const Nav = ({ navigation, state, camera, setCurrentDog }) => {
   return (
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          if (state.routeNames[state.index] === 'History') {
-            navigation.navigate('Gallery');
-          }
+          setCurrentDog(null);
+          navigation.navigate('History', { navFrom: 'notsnap' });
         }}
         style={styles.historyButton}
       >
@@ -26,9 +25,9 @@ const Nav = ({ navigation, state, camera }) => {
       <Pressable
         onPress={() => {
           if (state.routeNames[state.index] === 'Home') {
-            snap(camera).then((dogUri) => {
-              navigation.navigate('History', { dogUri: dogUri });
-              console.log(dogUri, 'in the nav');
+            snap(camera, navigation).then((dogObject) => {
+              setCurrentDog(dogObject);
+              // console.log(dogUri, 'in the nav');
             });
           } else {
             navigation.navigate('Home');

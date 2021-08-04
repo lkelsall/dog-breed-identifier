@@ -1,7 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 
 const dogsDir = FileSystem.documentDirectory + 'dogs/';
-const photoDir = FileSystem.documentDirectory + 'dogs/pics/';
+const photoDir = FileSystem.documentDirectory + 'pics/';
 
 export const storeDogPic = async (uri) => {
   const newUri = `${photoDir}/${Date.now()}.jpg`;
@@ -28,4 +28,16 @@ export const storeDogObj = async (dogObj) => {
 export const readDogObject = async (dogUri) => {
   const dogObject = await FileSystem.readAsStringAsync(dogUri);
   return JSON.parse(dogObject);
+};
+
+export const readDirectory = async () => {
+  const dogObjectsArray = await FileSystem.readDirectoryAsync(dogsDir);
+  const dogPromises = dogObjectsArray.map((dogFile) => {
+    return FileSystem.readAsStringAsync(`${dogsDir}${dogFile}`).then(
+      (result) => {
+        return JSON.parse(result);
+      }
+    );
+  });
+  return Promise.all(dogPromises);
 };

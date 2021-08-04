@@ -10,19 +10,35 @@ import Nav from './components/nav';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [currentDog, setCurrentDog] = useState(null);
   const [camera, setCamera] = useState(null);
   return (
     <NavigationContainer>
       <Tab.Navigator
         tabBar={(props, setParams) => {
-          return <Nav {...props} camera={camera} {...setParams} />;
+          return (
+            <Nav
+              {...props}
+              camera={camera}
+              setCurrentDog={setCurrentDog}
+              {...setParams}
+            />
+          );
         }}
       >
-        <Tab.Screen name="Home">
+        <Tab.Screen name='Home'>
           {(props) => <HomeScreen {...props} setCamera={setCamera} />}
         </Tab.Screen>
-        <Tab.Screen name="History" component={HistoryScreen} />
-        <Tab.Screen name="Gallery" component={GalleryScreen} />
+        <Tab.Screen name='History'>
+          {(props) => (
+            <HistoryScreen
+              {...props}
+              currentDog={currentDog}
+              setCurrentDog={setCurrentDog}
+            />
+          )}
+        </Tab.Screen>
+        <Tab.Screen name='Gallery' component={GalleryScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
