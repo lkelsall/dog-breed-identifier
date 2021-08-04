@@ -10,9 +10,7 @@ const Nav = ({ navigation, state, camera }) => {
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          if (state.routeNames[state.index] === 'History') {
-            navigation.navigate('Gallery');
-          }
+          navigation.navigate('History', { navFrom: 'home' });
         }}
         style={styles.historyButton}
       >
@@ -27,7 +25,10 @@ const Nav = ({ navigation, state, camera }) => {
         onPress={() => {
           if (state.routeNames[state.index] === 'Home') {
             snap(camera).then((dogUri) => {
-              navigation.navigate('History', { dogUri: dogUri });
+              navigation.navigate('History', {
+                dogUri: dogUri,
+                navFrom: 'snap',
+              });
               console.log(dogUri, 'in the nav');
             });
           } else {

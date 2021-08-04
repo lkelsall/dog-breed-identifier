@@ -6,16 +6,18 @@ import * as FileSystem from 'expo-file-system';
 import { useIsFocused } from '@react-navigation/native';
 
 const GalleryScreen = () => {
+  console.log('in gallery');
   const isFocused = useIsFocused();
   const [isLoading, setIsLoading] = useState(true);
 
   const [allDogs, setAllDogs] = useState([]);
 
-  const photoDir = FileSystem.documentDirectory + 'dogs/';
+  const dogsDir = FileSystem.documentDirectory + 'dogs/';
 
   useEffect(() => {
     readDirectory()
       .then((dogArray) => {
+        console.log(dogArray);
         setAllDogs(dogArray);
         setIsLoading(false);
       })

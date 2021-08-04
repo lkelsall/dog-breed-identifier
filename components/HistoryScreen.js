@@ -5,10 +5,13 @@ import CardDisplay from './CardDisplay';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { readDogObject } from '../utils/storage-utils';
+import Loading from './Loading';
+import GalleryScreen from './GalleryScreen';
 
 const HistoryScreen = ({ route }) => {
+  console.log('route console log >', route);
   const [currentDog, setCurrentDog] = useState(null);
-  const { dogUri } = route.params;
+  const { dogUri, navFrom } = route.params;
 
   useEffect(() => {
     if (dogUri) {
@@ -18,6 +21,26 @@ const HistoryScreen = ({ route }) => {
       });
     }
   }, [dogUri]);
+
+  if (currentDog) {
+    return (
+      <View>
+        <CardDisplay dogObject={currentDog} />
+      </View>
+    );
+  } else if (!currentDog && navFrom === 'snap') {
+    return (
+      <View>
+        <Loading />
+      </View>
+    );
+  } else if (!currentDog && navFrom !== 'snap') {
+    return (
+      <View>
+        <GalleryScreen />
+      </View>
+    );
+  }
 
   return (
     <View>
