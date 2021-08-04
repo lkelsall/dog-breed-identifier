@@ -15,8 +15,10 @@ const GalleryScreen = ({ setCurrentDog }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [allDogs, setAllDogs] = useState([]);
+  console.log('Gallery is being read');
 
   useEffect(() => {
+    console.log('in the useEffect');
     readDirectory()
       .then((dogArray) => {
         setAllDogs(dogArray);

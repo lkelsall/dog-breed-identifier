@@ -36,7 +36,7 @@ exports.snap = async (camera, navigation) => {
     })
     .then(([dogObjectUri, newDog]) => {
       console.log(dogObjectUri, 'in the util');
-      return newDog;
+      return { ...newDog, newUri: dogObjectUri };
     })
     .catch((err) => {
       console.log('fetch error:', err);

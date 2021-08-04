@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import { deleteCard } from '../utils/storage-utils';
 
-const CardDisplay = ({ dogObject }) => {
+const CardDisplay = ({ dogObject, setCurrentDog }) => {
   const deleteAlert = () => {
     Alert.alert(
       'Warning!',
@@ -16,7 +16,10 @@ const CardDisplay = ({ dogObject }) => {
         {
           text: 'yes',
           onPress: () => {
-            deleteCard();
+            setCurrentDog(null);
+            deleteCard(dogObject).then(() => {
+              console.log('in the deleteCard');
+            });
           },
           style: 'tick',
         },
@@ -86,6 +89,7 @@ CardDisplay.propTypes = {
   dogUri: PropTypes.string,
   route: PropTypes.object,
   dogObject: PropTypes.object,
+  setCurrentDog: PropTypes.func,
 };
 
 export default CardDisplay;

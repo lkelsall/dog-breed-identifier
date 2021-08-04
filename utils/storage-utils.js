@@ -17,7 +17,7 @@ export const storeDogPic = async (uri) => {
 };
 
 export const storeDogObj = async (dogObj) => {
-  const newUri = `${dogsDir}/${Date.now()}.txt`;
+  const newUri = `${dogsDir}${Date.now()}.txt`;
   const directoryInfo = await FileSystem.getInfoAsync(dogsDir);
   if (!directoryInfo.exist) {
     await FileSystem.makeDirectoryAsync(dogsDir, { intermediates: true });
@@ -40,4 +40,8 @@ export const readDirectory = async () => {
     );
   });
   return Promise.all(dogPromises);
+};
+export const deleteCard = async (dogObject) => {
+  console.log(dogObject, 'in utils');
+  await FileSystem.deleteAsync(dogObject.newUri);
 };
