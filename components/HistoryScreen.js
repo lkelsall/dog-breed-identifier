@@ -12,13 +12,13 @@ const HistoryScreen = ({ route, currentDog, setCurrentDog }) => {
   const { dogUri, navFrom } = route.params;
 
   useEffect(() => {
-    console.log('navigating to history');
+    console.log('dogUri from history screen', dogUri);
     if (dogUri) {
       readDogObject(dogUri).then((dogObject) => {
         setCurrentDog(dogObject);
       });
     }
-  }, [dogUri]);
+  }, []);
 
   if (currentDog) {
     return (
@@ -39,12 +39,6 @@ const HistoryScreen = ({ route, currentDog, setCurrentDog }) => {
       </View>
     );
   }
-
-  return (
-    <View>
-      {currentDog ? <CardDisplay dogObject={currentDog} /> : <View></View>}
-    </View>
-  );
 };
 
 HistoryScreen.propTypes = {

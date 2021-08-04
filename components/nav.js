@@ -25,12 +25,9 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
       <Pressable
         onPress={() => {
           if (state.routeNames[state.index] === 'Home') {
-            snap(camera).then((dogUri) => {
-              navigation.navigate('History', {
-                dogUri: dogUri,
-                navFrom: 'snap',
-              });
-              console.log(dogUri, 'in the nav');
+            snap(camera, navigation).then((dogObject) => {
+              setCurrentDog(dogObject);
+              // console.log(dogUri, 'in the nav');
             });
           } else {
             navigation.navigate('Home');
