@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import { deleteCard } from '../utils/storage-utils';
 
-const CardDisplay = ({ dogObject, setCurrentDog }) => {
+const CardDisplay = ({ dogObject, setCurrentDog, navigation }) => {
   const deleteAlert = () => {
     Alert.alert(
       'Warning!',
@@ -16,9 +16,9 @@ const CardDisplay = ({ dogObject, setCurrentDog }) => {
         {
           text: 'yes',
           onPress: () => {
-            setCurrentDog(null);
             deleteCard(dogObject).then(() => {
-              console.log('in the deleteCard');
+              setCurrentDog(null);
+              navigation.navigate('History', { navFrom: 'notsnap' });
             });
           },
           style: 'tick',
@@ -90,6 +90,7 @@ CardDisplay.propTypes = {
   route: PropTypes.object,
   dogObject: PropTypes.object,
   setCurrentDog: PropTypes.func,
+  navigation: PropTypes.object,
 };
 
 export default CardDisplay;
