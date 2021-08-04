@@ -27,7 +27,6 @@ exports.snap = async (camera, navigation) => {
       base64: base64image,
     })
     .then((response) => {
-      console.log(response.data.prediction, 'in api request');
       newDog = { ...response.data.prediction };
 
       newDog = { ...newDog, photoUri: dogPicUri };

@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import { deleteCard } from '../utils/storage-utils';
 
 const CardDisplay = ({ dogObject, setCurrentDog, navigation }) => {
-  console.log(dogObject);
   const deleteAlert = () => {
     Alert.alert(
       'Warning!',

@@ -19,7 +19,6 @@ const HistoryScreen = ({ route, currentDog, setCurrentDog, navigation }) => {
       </View>
     );
   } else if (!currentDog && navFrom === 'snap') {
-    console.log(' from snap');
     return (
       <View>
         <Loading />
