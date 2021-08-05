@@ -9,23 +9,19 @@ import { deleteCard } from '../utils/storage-utils';
 
 const CardDisplay = ({ dogObject, setCurrentDog, navigation }) => {
   const deleteAlert = () => {
-    Alert.alert(
-      'Warning!',
-      'Are you sure you do not want to add this card to the gallery?',
-      [
-        {
-          text: 'yes',
-          onPress: () => {
-            deleteCard(dogObject).then(() => {
-              setCurrentDog(null);
-              navigation.navigate('History', { navFrom: 'notsnap' });
-            });
-          },
-          style: 'tick',
+    Alert.alert('Warning!', 'Are you sure you want to delete this card?', [
+      {
+        text: 'Confirm delete',
+        onPress: () => {
+          deleteCard(dogObject).then(() => {
+            setCurrentDog(null);
+            navigation.navigate('History', { navFrom: 'notsnap' });
+          });
         },
-        { text: 'No', onPress: () => console.log('okay') },
-      ]
-    );
+        style: 'tick',
+      },
+      { text: 'Cancel' },
+    ]);
   };
 
   return (

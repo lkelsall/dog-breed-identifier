@@ -4,7 +4,8 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import { storeDogObj } from './storage-utils';
 
-exports.snap = async (camera, navigation) => {
+exports.snap = async (camera, navigation, setCurrentDog) => {
+  setCurrentDog(null);
   let newDog = {};
 
   let photo = await camera.takePictureAsync();
