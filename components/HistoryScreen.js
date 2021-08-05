@@ -5,13 +5,17 @@ import CardDisplay from './CardDisplay';
 import Loading from './Loading';
 import GalleryScreen from './GalleryScreen';
 
-const HistoryScreen = ({ route, currentDog, setCurrentDog }) => {
+const HistoryScreen = ({ route, currentDog, setCurrentDog, navigation }) => {
   const { navFrom } = route.params;
 
   if (currentDog) {
     return (
       <View>
-        <CardDisplay dogObject={currentDog} />
+        <CardDisplay
+          setCurrentDog={setCurrentDog}
+          dogObject={currentDog}
+          navigation={navigation}
+        />
       </View>
     );
   } else if (!currentDog && navFrom === 'snap') {

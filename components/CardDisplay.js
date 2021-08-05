@@ -7,22 +7,21 @@ import PropTypes from 'prop-types';
 
 import { deleteCard } from '../utils/storage-utils';
 
-const CardDisplay = ({ dogObject }) => {
+const CardDisplay = ({ dogObject, setCurrentDog, navigation }) => {
   const deleteAlert = () => {
-    Alert.alert(
-      'Warning!',
-      'Are you sure you do not want to add this card to the gallery?',
-      [
-        {
-          text: 'yes',
-          onPress: () => {
-            deleteCard();
-          },
-          style: 'tick',
+    Alert.alert('Warning!', 'Are you sure you want to delete this card?', [
+      {
+        text: 'Confirm delete',
+        onPress: () => {
+          deleteCard(dogObject).then(() => {
+            setCurrentDog(null);
+            navigation.navigate('History', { navFrom: 'notsnap' });
+          });
         },
-        { text: 'No', onPress: () => console.log('okay') },
-      ]
-    );
+        style: 'tick',
+      },
+      { text: 'Cancel' },
+    ]);
   };
 
   return (
@@ -86,6 +85,8 @@ CardDisplay.propTypes = {
   dogUri: PropTypes.string,
   route: PropTypes.object,
   dogObject: PropTypes.object,
+  setCurrentDog: PropTypes.func,
+  navigation: PropTypes.object,
 };
 
 export default CardDisplay;

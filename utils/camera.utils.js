@@ -4,7 +4,8 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import { storeDogObj } from './storage-utils';
 
-exports.snap = async (camera, navigation) => {
+exports.snap = async (camera, navigation, setCurrentDog) => {
+  setCurrentDog(null);
   let newDog = {};
 
   let photo = await camera.takePictureAsync();
@@ -27,15 +28,13 @@ exports.snap = async (camera, navigation) => {
       base64: base64image,
     })
     .then((response) => {
-      console.log(response.data.prediction, 'in api request');
       newDog = { ...response.data.prediction };
 
       newDog = { ...newDog, photoUri: dogPicUri };
 
-      return Promise.all([storeDogObj(newDog), newDog]);
+      return storeDogObj(newDog);
     })
-    .then(([dogObjectUri, newDog]) => {
-      console.log(dogObjectUri, 'in the util');
+    .then((newDog) => {
       return newDog;
     })
     .catch((err) => {

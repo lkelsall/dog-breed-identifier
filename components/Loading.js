@@ -1,23 +1,30 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 
 const Loading = () => {
   return (
-    <View style={[styles.container, styles.horizontal]}>
+    <View style={styles.container}>
       <Image source={require('../dog-images/Goodboy.jpg')}></Image>
+      <Text style={styles.text}>Fetching...</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: 'flex',
+    height: '100%',
+    backgroundColor: '#FBFBFB',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
+    margin: 20,
   },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10,
+  text: {
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    margin: 20,
   },
 });
 export default Loading;
