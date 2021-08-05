@@ -10,13 +10,11 @@ const HistoryScreen = ({ route, currentDog, setCurrentDog, navigation }) => {
 
   if (currentDog) {
     return (
-      <View>
-        <CardDisplay
-          setCurrentDog={setCurrentDog}
-          dogObject={currentDog}
-          navigation={navigation}
-        />
-      </View>
+      <CardDisplay
+        setCurrentDog={setCurrentDog}
+        dogObject={currentDog}
+        navigation={navigation}
+      />
     );
   } else if (!currentDog && navFrom === 'snap') {
     return (
