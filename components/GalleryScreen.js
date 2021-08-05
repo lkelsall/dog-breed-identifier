@@ -48,7 +48,7 @@ const GalleryScreen = ({ setCurrentDog }) => {
               }}
             >
               <Image
-                style={{ width: 100, height: 100, margin: 5 }}
+                style={styles.image}
                 source={{ uri: dogObject.photoUri }}
               />
             </TouchableOpacity>
@@ -60,9 +60,9 @@ const GalleryScreen = ({ setCurrentDog }) => {
 };
 const styles = StyleSheet.create({
   contentContainer: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#b0e0e6',
+    backgroundColor: '#008080',
     flexDirection: 'row',
     flexWrap: 'wrap',
     padding: 10,
@@ -85,6 +85,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: 'black',
     backgroundColor: '#008080',
+  },
+  image: {
+    width: 105,
+    height: 105,
+    margin: 3,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#ffebcd',
   },
 });
 

@@ -43,7 +43,7 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
       </Pressable>
       <View style={styles.dogIconView}>
         <FontAwesomeIcon
-          size={30}
+          size={40}
           style={styles.iconDog}
           icon={faDog}
         ></FontAwesomeIcon>
@@ -72,8 +72,10 @@ const styles = StyleSheet.create({
   photoButton: {
     width: '40%',
     height: '90%',
-    backgroundColor: '#f5fffa',
+    backgroundColor: '#5f9ea0',
     marginTop: '1%',
+    borderWidth: 1,
+    borderColor: '#f5fffa',
 
     borderRadius: 5,
   },
@@ -84,10 +86,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: 'center',
+    color: '#ffebcd',
   },
   iconDog: {
     alignSelf: 'center',
     marginTop: '28%',
+    color: '#ffebcd',
   },
   dogIconView: {
     width: '25%',
