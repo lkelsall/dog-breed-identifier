@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import CardDisplay from './CardDisplay';
 import Loading from './Loading';
-import GalleryScreen from './GalleryScreen';
+import Gallery from './GalleryScreen';
 
 const HistoryScreen = ({ route, currentDog, setCurrentDog, navigation }) => {
   const { navFrom } = route.params;
@@ -25,7 +25,7 @@ const HistoryScreen = ({ route, currentDog, setCurrentDog, navigation }) => {
   } else if (!currentDog && navFrom !== 'snap') {
     return (
       <View>
-        <GalleryScreen setCurrentDog={setCurrentDog} />
+        <Gallery setCurrentDog={setCurrentDog} />
       </View>
     );
   }

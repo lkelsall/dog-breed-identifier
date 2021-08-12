@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { readDirectory } from '../utils/storage-utils';
 import Loading from './Loading';
 
-const GalleryScreen = ({ setCurrentDog }) => {
+const Gallery = ({ setCurrentDog }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [allDogs, setAllDogs] = useState([]);
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
   },
 });
 
-GalleryScreen.propTypes = {
+Gallery.propTypes = {
   setCurrentDog: PropTypes.func,
 };
 
-export default GalleryScreen;
+export default Gallery;
