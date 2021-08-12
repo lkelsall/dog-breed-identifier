@@ -32,6 +32,10 @@ export const readDogObject = async (dogUri) => {
 };
 
 export const readDirectory = async () => {
+  const directoryInfo = await FileSystem.getInfoAsync(dogsDir);
+  if (!directoryInfo.exist) {
+    await FileSystem.makeDirectoryAsync(dogsDir, { intermediates: true });
+  }
   const dogObjectsArray = await FileSystem.readDirectoryAsync(dogsDir);
   const dogPromises = dogObjectsArray.map((dogFile) => {
     return FileSystem.readAsStringAsync(`${dogsDir}${dogFile}`).then(
@@ -42,6 +46,7 @@ export const readDirectory = async () => {
   });
   return Promise.all(dogPromises);
 };
+
 export const deleteCard = async (dogObject) => {
   await FileSystem.deleteAsync(dogObject.newUri);
 };
