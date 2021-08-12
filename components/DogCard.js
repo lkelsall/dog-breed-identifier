@@ -1,26 +1,26 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, Alert } from 'react-native';
-import { Card } from 'react-native-elements';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
+import React from "react";
+import { View, Text, Image, StyleSheet, Alert } from "react-native";
+import { Card } from "react-native-elements";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 
-import { deleteCard } from '../utils/storage-utils';
+import { deleteCard } from "../utils/storage-utils";
 
-const CardDisplay = ({ dogObject, setCurrentDog, navigation }) => {
+const DogCard = ({ dogObject, setCurrentDog, navigation }) => {
   const deleteAlert = () => {
-    Alert.alert('Warning!', 'Are you sure you want to delete this card?', [
+    Alert.alert("Warning!", "Are you sure you want to delete this card?", [
       {
-        text: 'Confirm delete',
+        text: "Confirm delete",
         onPress: () => {
           deleteCard(dogObject).then(() => {
             setCurrentDog(null);
-            navigation.navigate('History', { navFrom: 'notsnap' });
+            navigation.navigate("History", { navFrom: "notsnap" });
           });
         },
-        style: 'tick',
+        style: "tick",
       },
-      { text: 'Cancel' },
+      { text: "Cancel" },
     ]);
   };
 
@@ -63,33 +63,33 @@ const CardDisplay = ({ dogObject, setCurrentDog, navigation }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    height: '85%',
+    height: "85%",
   },
   stockImage: {
     borderRadius: 50,
     width: 100,
     height: 100,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
   },
   title: {
     fontSize: 30,
   },
   text: {
-    textAlign: 'left',
+    textAlign: "left",
     fontSize: 15,
-    fontWeight: 'bold',
-    color: '#008b8b',
+    fontWeight: "bold",
+    color: "#008b8b",
   },
   icon: {
-    color: '#5f9ea0',
+    color: "#5f9ea0",
     width: 70,
     height: 90,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
   },
   photo: {
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 1,
     borderRadius: 3,
     width: 400,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-CardDisplay.propTypes = {
+DogCard.propTypes = {
   dogUri: PropTypes.string,
   route: PropTypes.object,
   dogObject: PropTypes.object,
@@ -105,4 +105,4 @@ CardDisplay.propTypes = {
   navigation: PropTypes.object,
 };
 
-export default CardDisplay;
+export default DogCard;
