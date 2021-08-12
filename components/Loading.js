@@ -4,7 +4,7 @@ import { StyleSheet, View, Image, Text } from 'react-native';
 const Loading = () => {
   return (
     <View style={styles.container}>
-      <Image source={require('../dog-images/Goodboy.jpg')}></Image>
+      <Image source={require('../Goodboy.jpg')}></Image>
       <Text style={styles.text}>Fetching...</Text>
     </View>
   );
