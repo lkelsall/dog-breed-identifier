@@ -1,6 +1,6 @@
 # DogTags
 
-A mobile app, written in React Native and Tensorflow.js, which uses machine learning to classify photos of dogs by breed.
+A mobile app, written in React Native with Expo, which uses Tensorflow.js machine learning to classify photos of dogs by breed.
 
 For more information, and a demo, watch the presentation on YouTube [here](https://www.youtube.com/watch?v=rLSDtEcvVMk).
 
