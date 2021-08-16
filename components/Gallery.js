@@ -57,20 +57,20 @@ const styles = StyleSheet.create({
   scrollView: {
     height: '100%',
     width: '100%',
-    padding: '5%',
     backgroundColor: '#008080',
   },
   contentContainer: {
+    margin: '5%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 5,
+    width: 105,
+    height: 105,
     borderWidth: 1,
     borderColor: 'white',
+    marginHorizontal: '1%',
     marginVertical: '5%',
   },
 });
