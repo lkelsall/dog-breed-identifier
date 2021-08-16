@@ -34,28 +34,23 @@ const Gallery = ({ setCurrentDog }) => {
     );
   }
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {allDogs.map((dogObject) => {
-          return (
-            <TouchableOpacity
-              key={dogObject.photoUri}
-              onPress={() => {
-                setCurrentDog(dogObject);
-              }}
-            >
-              <Image
-                style={styles.image}
-                source={{ uri: dogObject.photoUri }}
-              />
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+    >
+      {allDogs.map((dogObject) => {
+        return (
+          <TouchableOpacity
+            key={dogObject.photoUri}
+            onPress={() => {
+              setCurrentDog(dogObject);
+            }}
+          >
+            <Image style={styles.image} source={{ uri: dogObject.photoUri }} />
+          </TouchableOpacity>
+        );
+      })}
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
