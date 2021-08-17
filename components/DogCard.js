@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
-import { Card } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
@@ -24,77 +23,75 @@ const DogCard = ({ dogObject, setCurrentDog, navigation }) => {
     ]);
   };
 
+  console.log(dogObject);
+
   return (
     <View style={styles.container}>
-      <Card>
-        <Card.Image
-          style={styles.photo}
-          source={{ uri: `${dogObject.photoUri}` }}
-        />
-        <Card.Divider />
-        <Card.Title style={styles.title}>{dogObject.breed}</Card.Title>
-        <View style={styles.text}>
-          <Image
-            style={styles.stockImage}
-            source={{ uri: `${dogObject.dog_url}` }}
-          />
-        </View>
-        <Text style={styles.text}>
-          Percentage Match: {Math.floor(dogObject.confidences * 100)}%
-        </Text>
-        <Text style={styles.text}>Temperament: {dogObject.temperament}</Text>
-        <Text style={styles.text}>
-          Characteristics: {dogObject.characteristics}
-        </Text>
-        <Text style={styles.text}>
-          Exercise requirements:
-          {dogObject.exercise}
-        </Text>
-        <Text style={styles.text}>Size: {dogObject.size}</Text>
-        <FontAwesomeIcon
-          size={30}
-          style={styles.icon}
-          icon={faTrash}
-          onPress={deleteAlert}
-        ></FontAwesomeIcon>
-      </Card>
+      <Image style={styles.userPhoto} source={{ uri: dogObject.photoUri }} />
+      <View style={styles.titleView}>
+        <Image style={styles.stockPhoto} source={{ uri: dogObject.dog_url }} />
+        <Text style={styles.heading}>{dogObject.breed}</Text>
+      </View>
+
+      <Text style={styles.text}>
+        {Math.floor(dogObject.confidences * 100)}% Match!
+      </Text>
+      <Text style={styles.text}>Temperament: {dogObject.temperament}</Text>
+      <Text style={styles.text}>
+        Characteristics: {dogObject.characteristics}
+      </Text>
+      <Text style={styles.text}>Exercise: {dogObject.exercise}</Text>
+      <Text style={styles.text}>Size: {dogObject.size}</Text>
+      <FontAwesomeIcon
+        size={30}
+        style={styles.binIcon}
+        icon={faTrash}
+        onPress={deleteAlert}
+      ></FontAwesomeIcon>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    height: '85%',
+    flex: 1,
+    backgroundColor: '#008080',
   },
-  stockImage: {
-    borderRadius: 50,
-    width: 100,
-    height: 100,
-    alignSelf: 'flex-end',
+  userPhoto: {
+    height: '50%',
+    width: '100%',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'white',
+    borderRadius: 2,
   },
-  title: {
-    fontSize: 30,
+  titleView: {
+    flexDirection: 'row',
+    marginVertical: '5%',
+    justifyContent: 'center',
   },
+  heading: {
+    fontSize: 28,
+    color: 'white',
+    alignSelf: 'center',
+  },
+  stockPhoto: {
+    height: 50,
+    width: 50,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 2,
+    marginRight: '5%',
+  },
+
   text: {
-    textAlign: 'left',
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#008b8b',
+    fontSize: 16,
+    color: 'white',
+    marginHorizontal: '10%',
   },
-  icon: {
-    color: '#5f9ea0',
-    width: 70,
-    height: 90,
+  binIcon: {
+    color: 'white',
     alignSelf: 'flex-end',
-  },
-  photo: {
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 3,
-    width: 400,
-    height: 300,
-    marginTop: 20,
+    marginBottom: '5%',
+    marginRight: '5%',
   },
 });
 DogCard.propTypes = {
