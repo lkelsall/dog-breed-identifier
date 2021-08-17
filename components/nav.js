@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, View, Pressable, Text, Alert } from 'react-native';
-import PropTypes from 'prop-types';
-import { snap } from '../utils/camera.utils';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHistory, faCamera, faDog } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { StyleSheet, View, Pressable, Text, Alert } from "react-native";
+import PropTypes from "prop-types";
+import { snap } from "../utils/camera.utils";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHistory, faCamera, faDog } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = ({ navigation, state, camera, setCurrentDog }) => {
   return (
@@ -11,9 +11,9 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
       <Pressable
         onPress={() => {
           setCurrentDog(null);
-          navigation.navigate('History', { navFrom: 'notsnap' });
+          navigation.navigate("History", { navFrom: "notsnap" });
         }}
-        style={styles.historyButton}
+        style={styles.sideButton}
       >
         <Text style={styles.buttonText}>History</Text>
         <FontAwesomeIcon
@@ -24,15 +24,15 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
       </Pressable>
       <Pressable
         onPress={() => {
-          if (state.routeNames[state.index] === 'Home') {
+          if (state.routeNames[state.index] === "Home") {
             snap(camera, navigation, setCurrentDog).then((dogObject) => {
               setCurrentDog(dogObject);
             });
           } else {
-            navigation.navigate('Home');
+            navigation.navigate("Home");
           }
         }}
-        style={styles.photoButton}
+        style={styles.middleButton}
       >
         <Text style={styles.buttonText}>Take photo</Text>
         <FontAwesomeIcon
@@ -44,12 +44,12 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
       <Pressable
         onPress={() => {
           Alert.alert(
-            'DogTags',
-            'Welcome to DogTags!\nTake dog snaps\nSave dog cards\nHave fun! 🐶',
-            [{ text: 'Get Started!' }]
+            "DogTags",
+            "Welcome to DogTags!\nTake dog snaps\nSave dog cards\nHave fun! 🐶",
+            [{ text: "Get Started!" }]
           );
         }}
-        style={styles.historyButton}
+        style={styles.sideButton}
       >
         <Text style={styles.buttonText}>DogTags</Text>
         <FontAwesomeIcon
@@ -64,53 +64,39 @@ const Nav = ({ navigation, state, camera, setCurrentDog }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '15%',
-    width: '100%',
-    backgroundColor: '#008080',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    height: "15%",
+    width: "100%",
+    backgroundColor: "#008080",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
-  historyButton: {
-    width: '25%',
-    height: '90%',
-    backgroundColor: '#5f9ea0',
+  sideButton: {
+    width: "25%",
+    height: "90%",
+    backgroundColor: "#5f9ea0",
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#f5fffa',
-    marginTop: '1%',
+    borderColor: "#f5fffa",
+    marginTop: "1%",
   },
-  photoButton: {
-    width: '40%',
-    height: '90%',
-    backgroundColor: '#5f9ea0',
-    marginTop: '1%',
+  middleButton: {
+    width: "40%",
+    height: "90%",
+    backgroundColor: "#5f9ea0",
+    marginTop: "1%",
     borderWidth: 1,
-    borderColor: '#f5fffa',
+    borderColor: "#f5fffa",
 
     borderRadius: 5,
   },
   buttonText: {
     padding: 8,
-    alignSelf: 'center',
-    fontWeight: '500',
+    alignSelf: "center",
+    fontWeight: "500",
   },
   icon: {
-    alignSelf: 'center',
-    color: '#ffebcd',
-  },
-  iconDog: {
-    alignSelf: 'center',
-    marginTop: '28%',
-    color: '#ffebcd',
-  },
-  dogIconView: {
-    width: '25%',
-    height: '90%',
-    backgroundColor: '#5f9ea0',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#f5fffa',
-    marginTop: '1%',
+    alignSelf: "center",
+    color: "#ffebcd",
   },
 });
 
